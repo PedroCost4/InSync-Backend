@@ -5,19 +5,45 @@ package users;
 option go_package = "./pb";
 
 service Users {
-  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc GetUser(GetUserRequest) returns (UserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (UserResponse);
+  rpc Register(CreateUserRequest) returns (UserResponse);
+  rpc Login(LoginRequest) returns (UserResponse);
 }
 
 message GetUserRequest {
     string id = 1;
 }
 
-message GetUserResponse {
+message CreateUserRequest {
+    string userName = 1;
+    string email = 2;
+    string password = 3;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message UpdateUserRequest {
+    string id = 1;
+    string userName = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message DeleteUserRequest {
+    string id = 1;
+}
+
+message UserResponse {
     User user = 1;
 }
 
 message User {
     string id = 1;
-    string name = 2;
+    string userName = 2;
     string email = 3;
 }
